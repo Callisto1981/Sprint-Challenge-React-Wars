@@ -1,39 +1,57 @@
 import React, { useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import styled from "styled-components";
+import { Button, Modal, ModalHeader, ModalBody, Progress } from "reactstrap";
 
 const Card = props => {
-  const { buttonLabel, className } = props;
+  const { className } = props;
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
+  const NewDiv = styled.div`
+    width: 10%;
+    margin: auto;
+  `;
+
+  const NewButton = styled.button`
+    width: 100%;
+    background-color: red;
+    opacity: 0.5;
+    border: 5px solid black;
+    border-radius: 20%;
+  `;
+
   return (
-    <div>
-      <Button color="success" onClick={toggle}>
+    <NewDiv className="card">
+      <NewButton color="success" onClick={toggle}>
         <h1>{props.name}</h1>
-      </Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+      </NewButton>
+
+      <Modal
+        style={{ backgroundColor: "white", borderColor: "black" }}
+        isOpen={modal}
+        toggle={toggle}
+        className={className}
+      >
+        <ModalHeader toggle={toggle}>
+          <h1>{props.name}</h1>
+        </ModalHeader>
+        <ModalBody background="white" color="white">
+          <p>Height: {props.height}</p>
+          <p>Mass: {props.mass}</p>
+          <p>Skills:</p>
+          <div>
+            <div className="text-center">Fighting Ability: 7.2%</div>
+            <Progress color="success" value="7.2" />
+            <div className="text-center">Speed Ability: 19.8%</div>
+            <Progress color="warning" value="19.8" />
+            <div className="text-center">Swimming Ability: 70.2%</div>
+            <Progress color="success" value={70.2} />
+          </div>
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
       </Modal>
-    </div>
+    </NewDiv>
   );
 };
 
