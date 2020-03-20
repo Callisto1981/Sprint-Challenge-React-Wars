@@ -1,8 +1,11 @@
 import React from "react";
-import { checkPropTypes } from "prop-types";
 
 const Card = props => {
-  return <div>{props.name}</div>;
+  return (
+    <div>{props.name}</div>
+    <div>{props.height}</div>
+    <div>{props.mass}</div>
+  );
 };
 
 export default Card;
